@@ -1,8 +1,88 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sobre Nosotros</title></head>
-<body style="font-family:sans-serif;background:#fff;margin:20px">
-<h1>Sobre Nosotros</h1>
-<p>Juana Debiazzi & Naza Debiazzi — Contenido, redacción y diseño web</p>
-<p><a href="index.html">Volver al inicio</a></p>
-</body></html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sobre Nosotros — Uruguay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Sobre el equipo que preparó la presentación de Uruguay">
+  <style>
+    :root{
+      --bg:#0b1220; --card:#0f1724; --text:#e6eef8; --muted:rgba(230,238,248,0.75); --accent:#47a7ff; --glass-border: rgba(255,255,255,0.04); --shadow: rgba(2,6,23,0.6);
+    }
+    :root.light{ --bg:#f6fbff; --card:#fff; --text:#0b1720; --muted:rgba(11,23,32,0.65); --accent:#0077c2; --glass-border: rgba(3,102,214,0.08); --shadow: rgba(2,6,23,0.06); }
+    @media (prefers-color-scheme: light){ :root{ --bg:#f6fbff; --card:#fff; --text:#0b1720; --muted:rgba(11,23,32,0.65); --accent:#0077c2; --glass-border: rgba(3,102,214,0.08); --shadow: rgba(2,6,23,0.06); } }
+    @media (prefers-color-scheme: dark){ :root{ --bg:#0b1220; --card:#0f1724; --text:#e6eef8; --muted:rgba(230,238,248,0.75); --accent:#47a7ff; --glass-border: rgba(255,255,255,0.04); --shadow: rgba(2,6,23,0.6); } }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    .container{max-width:900px;margin:0 auto;padding:22px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0}
+    .flag{width:84px;border-radius:8px;box-shadow:0 10px 30px rgba(2,6,23,0.25);}
+    h1{margin:0;font-size:1.4rem}
+    .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid var(--glass-border);box-shadow:0 12px 30px var(--shadow);backdrop-filter: blur(6px)}
+    .team{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .member{flex:1 1 180px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.03)}
+    .member strong{display:block}
+    .roles{color:var(--muted);margin-top:6px;font-size:0.95rem}
+    footer{margin-top:18px;text-align:center;color:var(--muted)}
+    .banner{height:6px;background:linear-gradient(90deg,var(--accent),#39b0ff);border-radius:6px;margin-top:12px}
+    @media(max-width:600px){ .member{flex:1 1 100%} .flag{width:64px} header{flex-direction:column;align-items:flex-start} }
+  </style>
+</head>
+<body>
+  <div class="container" id="page">
+    <header>
+      <div style="display:flex;align-items:center;gap:12px">
+        <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Uruguay.svg" alt="Bandera de Uruguay">
+        <div>
+          <h1>Sobre Nosotros</h1>
+          <div class="muted">Equipo — Feria de los Países</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="muted">Tema: automático • usa el botón en la página principal</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Quiénes somos</h2>
+        <p class="roles">Somos un grupo de estudiantes que preparó esta presentación para la Feria de los Países. Nuestro objetivo fue reunir información clara, visual y didáctica sobre Uruguay para compartirla con la escuela y el público.</p>
+        <div class="banner"></div>
+
+        <h3 style="margin-top:18px">Integrantes</h3>
+        <div class="team" role="list">
+          <div class="member" role="listitem"><strong>Lucio Vincenti</strong><div class="roles">Investigación y diseño</div></div>
+          <div class="member" role="listitem"><strong>Juana Debiazzi &amp; Naza Debiazzi</strong><div class="roles">Contenido, redacción y diseño web</div></div>
+          <div class="member" role="listitem"><strong>Angus Davidson</strong><div class="roles">Multimedia</div></div>
+          <div class="member" role="listitem"><strong>Delfina Dallaverde E.</strong><div class="roles">Edición y estilo</div></div>
+          <div class="member" role="listitem"><strong>Matías González</strong><div class="roles">Revisión y datos</div></div>
+        </div>
+
+        <h3 style="margin-top:16px">Contacto</h3>
+        <p class="roles">Pueden comunicarse con nosotros a través del docente responsable o presentarnos preguntas en la feria.</p>
+        <p class="muted">Diseño pensado para stands escolares: legible, responsive y visualmente atractivo.</p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="muted">© Feria de los Países — Proyecto Uruguay</div>
+    </footer>
+  </div>
+
+  <script>
+    // keep theme consistent with index page toggle if opened from same domain/local files
+    (function(){
+      const storageKey = 'site-theme';
+      function applyTheme(theme){
+        if(theme === 'light') document.documentElement.classList.add('light');
+        else document.documentElement.classList.remove('light');
+      }
+      let stored = localStorage.getItem(storageKey);
+      if(!stored || stored === 'auto') {
+        if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
+      } else applyTheme(stored);
+    })();
+  </script>
+</body>
+</html>

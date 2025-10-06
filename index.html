@@ -1,16 +1,277 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uruguay — Feria de los Países</title></head>
-<body style="font-family:sans-serif;background:#f0f8ff;margin:20px">
-<h1><img src="img/bandera.svg" alt="Bandera" style="height:40px;vertical-align:middle;margin-right:10px">Uruguay</h1>
-<p>Bienvenidos al sitio de Uruguay - Feria de los Países</p>
-<img src="img/banner.jpg" alt="Vista de Uruguay" style="max-width:100%;border-radius:10px">
-<h2>Montevideo</h2>
-<img src="img/montevideo.jpg" alt="Montevideo" style="width:100%;max-width:500px">
-<h2>Flor Nacional</h2>
-<img src="img/ceibo.jpg" alt="Ceibo" style="width:100%;max-width:500px">
-<h2>Carnaval</h2>
-<img src="img/carnaval.jpg" alt="Carnaval" style="width:100%;max-width:500px">
-<p><a href="sobre.html">Ir a Sobre Nosotros</a></p>
-</body></html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Uruguay — Feria de los Países</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Uruguay - Historia, cultura, naturaleza y datos curiosos. Proyecto escolar.">
+  <style>
+    :root{
+      --bg:#0f1724; /* dark base fallback */
+      --card:#0b1220;
+      --text:#e6eef8;
+      --muted:rgba(230,238,248,0.75);
+      --accent:#47a7ff;
+      --glass: rgba(255,255,255,0.04);
+      --glass-strong: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.06);
+      --shadow: rgba(2,6,23,0.6);
+    }
+    /* light theme variables */
+    :root.light {
+      --bg: #f6fbff;
+      --card: #ffffff;
+      --text: #0b1720;
+      --muted: rgba(11,23,32,0.65);
+      --accent: #0077c2;
+      --glass: rgba(3, 102, 214, 0.02);
+      --glass-strong: rgba(3,102,214,0.03);
+      --glass-border: rgba(3,102,214,0.08);
+      --shadow: rgba(2,6,23,0.06);
+    }
+
+    /* auto by system */
+    @media (prefers-color-scheme: light) {
+      :root { --bg: #f6fbff; --card:#ffffff; --text:#0b1720; --muted: rgba(11,23,32,0.65); --accent:#0077c2; --glass: rgba(3, 102, 214, 0.02); --glass-border: rgba(3,102,214,0.08); --shadow: rgba(2,6,23,0.06); }
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#0b1220; --card:#0f1724; --text:#e6eef8; --muted:rgba(230,238,248,0.75); --accent:#47a7ff; --glass: rgba(255,255,255,0.03); --glass-border: rgba(255,255,255,0.04); --shadow: rgba(2,6,23,0.6); }
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--text);background:linear-gradient(180deg,var(--bg),var(--bg));-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:20px;}
+    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0}
+    .brand{display:flex;align-items:center;gap:14px}
+    .flag-large{width:120px;height:auto;border-radius:8px;box-shadow:0 8px 30px rgba(2,6,23,0.35);border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));padding:6px}
+    h1{margin:0;font-size:1.6rem;letter-spacing:0.2px}
+    .lead{font-size:0.95rem;color:var(--muted);margin-top:6px}
+
+    nav.topnav{display:flex;gap:10px;align-items:center}
+    nav.topnav a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--text);transition:all .18s ease;position:relative;overflow:hidden}
+    nav.topnav a:hover{box-shadow:0 6px 18px var(--shadow);transform:translateY(-3px)}
+    /* neon-ish hover */
+    nav.topnav a::after{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg, rgba(71,167,255,0.12), rgba(0,119,194,0.08));transition:width .25s ease;border-radius:inherit;z-index:0}
+    nav.topnav a:hover::after{width:100%}
+    nav.topnav a span{position:relative;z-index:1}
+
+    /* theme toggle */
+    .theme-toggle{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid var(--glass-border);color:var(--text);padding:8px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px var(--shadow);}
+    .theme-toggle svg{width:18px;height:18px;display:block}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr;gap:18px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border);box-shadow:0 14px 40px rgba(2,6,23,0.16)}
+    .hero-inner{display:flex;flex-direction:column;gap:12px}
+    .hero-banner{width:100%;border-radius:10px;overflow:hidden;position:relative}
+    .hero-banner img{width:100%;height:300px;object-fit:cover;display:block;filter:contrast(1.02) saturate(1.05)}
+    .hero-title{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .cta{background:linear-gradient(90deg,var(--accent), #39b0ff);color:white;padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 30px rgba(3,102,214,0.12)}
+
+    /* layout */
+    .layout{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px}
+    .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));border-radius:12px;padding:16px;border:1px solid var(--glass-border);box-shadow:0 10px 30px var(--shadow);backdrop-filter: blur(6px);position:relative;overflow:visible}
+    .card.reflect::after{content:'';position:absolute;left:0;top:0;width:70%;height:30%;background:linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));transform:skewY(-6deg);filter:blur(18px);opacity:0.6;border-radius:12px;pointer-events:none}
+    .facts{display:flex;flex-direction:column;gap:10px}
+    .fact{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 12px rgba(2,6,23,0.06) inset}
+    .fact strong{display:block;margin-bottom:6px}
+    .small{color:var(--muted);font-size:0.95rem}
+
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+    .gallery img{width:100%;height:100px;object-fit:cover;border-radius:8px;display:block}
+
+    .timeline{display:flex;flex-direction:column;gap:10px}
+    .timeline .item{padding:12px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border-left:4px solid var(--accent)}
+
+    /* footer */
+    footer{margin-top:28px;padding:18px;border-radius:10px;text-align:center;color:var(--muted)}
+
+    /* responsive */
+    @media(max-width:1000px){
+      .layout{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .hero-banner img{height:220px}
+    }
+    @media(max-width:520px){
+      header.site-header{flex-direction:column;align-items:flex-start}
+      .flag-large{width:88px}
+      nav.topnav{width:100%;overflow:auto}
+      .gallery img{height:120px}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .padded{padding:12px}
+  </style>
+</head>
+<body>
+  <div class="container" id="page">
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Uruguay.svg" alt="Bandera de Uruguay" class="flag-large" id="flag">
+        <div>
+          <h1>Uruguay</h1>
+          <div class="lead">Historia, cultura y curiosidades — Feria de los Países</div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-left:auto;align-items:center">
+        <nav class="topnav" aria-label="Navegación principal">
+          <a href="#principal"><span>Inicio</span></a>
+          <a href="#ubicacion"><span>Ubicación</span></a>
+          <a href="#historia"><span>Historia</span></a>
+          <a href="#gastronomia"><span>Gastronomía</span></a>
+          <a href="sobre.html"><span>Sobre Nosotros</span></a>
+        </nav>
+
+        <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema" style="margin-left:12px">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"></path>
+          </svg>
+          <span class="small">Tema</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="principal">
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-banner card reflect" aria-hidden="false">
+            <img src="https://images.unsplash.com/photo-1545249390-320b0e0f7bf2?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0" alt="Vista de Uruguay - playa y ciudad">
+          </div>
+          <div class="hero-title">
+            <div>
+              <h2 style="margin:0">Uruguay — Ficha rápida</h2>
+              <div class="small muted">Datos esenciales y curiosidades</div>
+            </div>
+            <a class="cta" href="#ubicacion">Explorar</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="layout">
+        <div>
+          <div class="card reflect">
+            <h3>Ficha rápida</h3>
+            <div class="facts" style="margin-top:10px">
+              <div class="fact"><strong>Capital</strong><div class="small">Montevideo</div></div>
+              <div class="fact"><strong>Superficie</strong><div class="small">176.215 km²</div></div>
+              <div class="fact"><strong>Población</strong><div class="small">≈ 3.388.000 (estim.)</div></div>
+              <div class="fact"><strong>Moneda</strong><div class="small">Peso uruguayo</div></div>
+              <div class="fact"><strong>Idioma</strong><div class="small">Español (of.) • Lengua de señas</div></div>
+              <div class="fact"><strong>Prefijo</strong><div class="small">+598</div></div>
+            </div>
+
+            <h3 id="ubicacion" style="margin-top:18px">Ubicación geográfica</h3>
+            <p class="small">Uruguay se ubica en la costa este de Sudamérica, entre Brasil y Argentina. Limita al este con el Océano Atlántico y al oeste con el Río Uruguay.</p>
+
+            <h3 id="historia">Historia y bandera</h3>
+            <div class="timeline">
+              <div class="item"><strong>Origen del nombre:</strong> Proviene del guaraní <em>Uru‑gua‑i</em>, "río de los pájaros" o "río de los caracoles".</div>
+              <div class="item"><strong>1828</strong> – Primera bandera con franjas alternas.</div>
+              <div class="item"><strong>1830</strong> – Se incorpora el Sol de Mayo y se fijan 9 franjas.</div>
+              <div class="item"><strong>1952</strong> – Ajuste al diseño del Sol de Mayo.</div>
+            </div>
+
+            <h3 id="gastronomia" style="margin-top:18px">Gastronomía y costumbres</h3>
+            <p class="small">Asado, mate, bizcochos, tortas fritas y dulce de leche. Música: candombe, murga y tango.</p>
+          </div>
+
+          <div class="card reflect" style="margin-top:16px">
+            <h3>Personajes destacados</h3>
+            <p class="small"><strong>Eduardo Galeano</strong>, <strong>Mario Benedetti</strong>, <strong>Juana de Ibarbourou</strong>, <strong>Jorge Drexler</strong>, <strong>Luis Suárez</strong>.</p>
+            <h4 style="margin-top:12px">Curiosidades</h4>
+            <ul class="small">
+              <li>Uruguay tuvo políticas pioneras en derecho civil y tiene fuerte tradición democrática.</li>
+              <li>Casapueblo (Punta Ballena) y el litoral costero son atractivos turísticos.</li>
+              <li>El ceibo es la flor nacional.</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card reflect">
+            <h3>Mapa</h3>
+            <div style="border-radius:8px;overflow:hidden;margin-top:8px">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1354064.7332198618!2d-58.53651285219438!3d-32.96404644134784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b1234567890abc%3A0x0!2sUruguay!5e0!3m2!1ses-419!2sus!4v1600000000000!5m2!1ses-419!2sus" loading="lazy" style="width:100%;height:200px;border:0"></iframe>
+            </div>
+
+            <h3 style="margin-top:12px">Galería</h3>
+            <div class="gallery">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Montevideo_Ciudad_Vieja.jpg" alt="Montevideo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Erythrina_crista-galli_flower.jpg" alt="Ceibo">
+              <img src="https://images.unsplash.com/photo-1505765054887-5b6b5c3e7b17?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=0" alt="Carnaval">
+            </div>
+          </div>
+
+          <div class="card reflect" style="margin-top:16px">
+            <h3>Bandera</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Uruguay.svg" alt="Bandera de Uruguay" style="width:100%;border-radius:8px;margin-top:8px">
+            <p class="small" style="margin-top:8px">Nueve franjas y el Sol de Mayo como símbolo de independencia.</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>Proyecto: Lucio, Juana, Angus, Delfina, Matías & Naza.</div>
+        <div class="small">© Feria de los Países — 2025</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme handling: auto + manual with localStorage
+    (function(){
+      const root = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+      const icon = document.getElementById('themeIcon');
+      const storageKey = 'site-theme'; // 'light' | 'dark' | 'auto'
+
+      function applyTheme(theme){
+        if(theme === 'light'){
+          document.documentElement.classList.add('light');
+          icon.innerHTML = '<path d=\"M6.76 4.84l-1.8-1.79L3.17 5.9 4.97 7.7 6.76 4.84zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 1.08l-1.79 1.8 2.6 2.86 1.79-1.79-2.6-2.87zM17 13h3v-2h-3v2zM12 6a6 6 0 100 12 6 6 0 000-12zM6.76 19.16l1.79 1.79 2.6-2.86-1.79-1.8-2.6 2.87zM3.17 18.1l1.79-1.8-2.6-2.86-1.79 1.79 2.6 2.87zM17 19h2v-2h-2v2z\" fill=\"currentColor\"/>';
+        } else {
+          document.documentElement.classList.remove('light');
+          icon.innerHTML = '<path d=\"M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z\" fill=\"currentColor\"/>';
+        }
+      }
+
+      function getPreferredFromSystem(){
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+
+      // initial
+      let stored = localStorage.getItem(storageKey);
+      if(!stored || stored === 'auto'){
+        // use system
+        applyTheme(getPreferredFromSystem());
+      } else {
+        applyTheme(stored);
+      }
+
+      // listen to system changes
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+        let stored = localStorage.getItem(storageKey);
+        if(!stored || stored === 'auto'){
+          applyTheme(getPreferredFromSystem());
+        }
+      });
+
+      // toggle cycles: auto -> light -> dark -> auto
+      toggle.addEventListener('click', () => {
+        let cur = localStorage.getItem(storageKey) || 'auto';
+        let next = cur === 'auto' ? 'light' : (cur === 'light' ? 'dark' : 'auto');
+        localStorage.setItem(storageKey, next);
+        if(next === 'auto') applyTheme(getPreferredFromSystem()); else applyTheme(next);
+        // small pulse
+        toggle.animate([{transform:'scale(0.98)'},{transform:'scale(1)'}],{duration:160,easing:'ease-out'});
+      });
+    })();
+  </script>
+</body>
+</html>
