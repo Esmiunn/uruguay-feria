@@ -27,6 +27,18 @@
     footer{margin-top:18px;text-align:center;color:var(--muted)}
     .banner{height:6px;background:linear-gradient(90deg,var(--accent),#39b0ff);border-radius:6px;margin-top:12px}
     @media(max-width:600px){ .member{flex:1 1 100%} .flag{width:64px} header{flex-direction:column;align-items:flex-start} }
+
+    /* theme toggle */
+    .theme-toggle{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid var(--glass-border);color:var(--text);padding:8px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px var(--shadow);}
+    .theme-toggle svg{width:18px;height:18px;display:block}
+	
+	nav.topnav{display:flex;gap:10px;align-items:center}
+    nav.topnav a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--text);transition:all .18s ease;position:relative;overflow:hidden}
+    nav.topnav a:hover{box-shadow:0 6px 18px var(--shadow);transform:translateY(-3px)}
+    /* neon-ish hover */
+    nav.topnav a::after{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg, rgba(71,167,255,0.12), rgba(0,119,194,0.08));transition:width .25s ease;border-radius:inherit;z-index:0}
+    nav.topnav a:hover::after{width:100%}
+    nav.topnav a span{position:relative;z-index:1}
   </style>
 </head>
 <body>
@@ -39,11 +51,12 @@
           <div class="muted">Equipo — Feria de los Países</div>
         </div>
       </div>
-      <div style="text-align:right">
-        <div class="muted">Tema: automático • usa el botón en la página principal</div>
+	   <div class="row" style="margin-left:auto;align-items:center">
+        <nav class="topnav" aria-label="Navegación principal">
+          <a href="index.html"><span>Pagina Principal</span></a>
+        </nav>
       </div>
     </header>
-
     <main>
       <section class="card">
         <h2>Quiénes somos</h2>
@@ -53,15 +66,12 @@
         <h3 style="margin-top:18px">Integrantes</h3>
         <div class="team" role="list">
           <div class="member" role="listitem"><strong>Lucio Vincenti</strong><div class="roles">Investigación y diseño</div></div>
-          <div class="member" role="listitem"><strong>Juana Debiazzi &amp; Naza Debiazzi</strong><div class="roles">Contenido, redacción y diseño web</div></div>
+          <div class="member" role="listitem"><strong>Juana Debiazzi</strong><div class="roles">Contenido, redacción</div></div>
           <div class="member" role="listitem"><strong>Angus Davidson</strong><div class="roles">Multimedia</div></div>
           <div class="member" role="listitem"><strong>Delfina Dallaverde E.</strong><div class="roles">Edición y estilo</div></div>
           <div class="member" role="listitem"><strong>Matías González</strong><div class="roles">Revisión y datos</div></div>
+          <div class="member" role="listitem"><strong>Naza Debiazzi</strong><div class="roles">Diseño web</div></div>
         </div>
-
-        <h3 style="margin-top:16px">Contacto</h3>
-        <p class="roles">Pueden comunicarse con nosotros a través del docente responsable o presentarnos preguntas en la feria.</p>
-        <p class="muted">Diseño pensado para stands escolares: legible, responsive y visualmente atractivo.</p>
       </section>
     </main>
 
