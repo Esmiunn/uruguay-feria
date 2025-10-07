@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Uruguay — Feria de los Países</title>
@@ -58,8 +59,33 @@
     nav.topnav a span{position:relative;z-index:1}
 
     /* theme toggle */
-    .theme-toggle{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid var(--glass-border);color:var(--text);padding:8px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px var(--shadow);}
-    .theme-toggle svg{width:18px;height:18px;display:block}
+    .theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px var(--shadow);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+.theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
 
     /* hero */
     .hero{display:grid;grid-template-columns:1fr;gap:18px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border);box-shadow:0 14px 40px rgba(2,6,23,0.16)}
@@ -107,6 +133,11 @@
   </style>
 </head>
 <body>
+<img src="img/favicon.png" alt="Logo Uruguay"
+     style="position:fixed; bottom:20px; left:20px; width:90px; opacity:0.9;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); 
+            transition: transform 0.2s ease;">
+
   <div class="container" id="page">
     <header class="site-header" role="banner">
       <div class="brand">
@@ -126,12 +157,11 @@
           <a href="sobre.html"><span>Sobre Nosotros</span></a>
         </nav>
 
-        <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema" style="margin-left:12px">
-          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"></path>
-          </svg>
-          <span class="small">Tema</span>
-        </button>
+<button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+  <svg id="themeIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"></path>
+  </svg>
+</button>
       </div>
     </header>
 
@@ -205,12 +235,17 @@
               <img src="img/carnaval.jpg" alt="Carnaval">
             </div>
           </div>
-
           <div class="card reflect" style="margin-top:16px">
             <h3>Bandera</h3>
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Uruguay.svg" alt="Bandera de Uruguay" style="width:100%;border-radius:8px;margin-top:8px">
             <p class="small" style="margin-top:8px">Nueve franjas y el Sol de Mayo como símbolo de independencia.</p>
           </div>
+			<div style="text-align:right; margin-top:20px;">
+				<img src="img/favicon.png" alt="Logo Uruguay"
+				style="max-width:400px; width:auto; height:auto;
+              opacity:0.95; filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));">
+			</div>
+
         </aside>
       </div>
     </main>

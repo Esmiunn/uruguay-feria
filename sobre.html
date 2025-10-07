@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sobre Nosotros — Uruguay</title>
@@ -29,8 +30,33 @@
     @media(max-width:600px){ .member{flex:1 1 100%} .flag{width:64px} header{flex-direction:column;align-items:flex-start} }
 
     /* theme toggle */
-    .theme-toggle{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid var(--glass-border);color:var(--text);padding:8px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px var(--shadow);}
-    .theme-toggle svg{width:18px;height:18px;display:block}
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px var(--shadow);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+.theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
 	
 	nav.topnav{display:flex;gap:10px;align-items:center}
     nav.topnav a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--text);transition:all .18s ease;position:relative;overflow:hidden}
@@ -39,9 +65,27 @@
     nav.topnav a::after{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg, rgba(71,167,255,0.12), rgba(0,119,194,0.08));transition:width .25s ease;border-radius:inherit;z-index:0}
     nav.topnav a:hover::after{width:100%}
     nav.topnav a span{position:relative;z-index:1}
+	
+	a {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #39b0ff; /* o el celeste que uses */
+  text-decoration: none; /* asegura que nunca aparezca subrayado */
+}
+
   </style>
 </head>
 <body>
+<button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+  <svg id="themeIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"></path>
+  </svg>
+</button>
   <div class="container" id="page">
     <header>
       <div style="display:flex;align-items:center;gap:12px">
@@ -76,6 +120,12 @@
     </main>
 
     <footer>
+	<div style="text-align:center; margin-top:40px;">
+	<img src="img/favicon.png" alt="Logo Uruguay" 
+       style="max-width:180px; width:40%; height:auto; 
+              filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">
+	</div>
+
       <div class="muted">© Feria de los Países — Proyecto Uruguay</div>
     </footer>
   </div>
